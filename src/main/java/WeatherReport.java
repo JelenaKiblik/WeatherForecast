@@ -1,4 +1,4 @@
-package weatherProgram;
+package java;
 
 public class WeatherReport {
 
