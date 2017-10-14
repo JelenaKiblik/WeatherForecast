@@ -34,18 +34,7 @@ public class WeatherReport {
         return 0;
     }
 
-    public float changeTempSystem(String system, float temp) {
-        float changedTemp = 0;
-        if (system.equals("celsius")) {
-            // TODO change temp into fahrenheit system;
-            changedTemp = 0;
-        } else if (system.equals("fahreinheit")) {
-            changedTemp = 0;
-        } else if (system.equals("kelvin")) {
-            changedTemp = 0;
-        }
-        return changedTemp;
-    }
+    public float changeTempSystem(String system, float temp) { float changedTemp = 0; return changedTemp; }
 
     public String getReport() {
         // TODO Compile the full report;
