@@ -1,43 +1,56 @@
-package java;
+package program;
+
+import dataParser.DataExtractor;
+import dataParser.ReportCompiler;
+import weatherSpecifier.CurrentWeather;
 
 public class WeatherReport {
 
-    public WeatherReport(String jsonWeatherData) {
-        // TODO Compile a report using other methods to get necessary data.
+    private String weatherData;
+    private DataExtractor extractor;
+    private CurrentWeather currentWeather;
+
+    public WeatherReport(String jsonWeatherData, CurrentWeather currentWeather) {
+        this.weatherData = jsonWeatherData;
+        extractor = new DataExtractor(this, currentWeather);
     }
 
-    public float getHighestTemperature() {
-        return 0;
+    public double getHighestTemperature() {
+        return extractor.getMaxTemperature();
     }
 
-    public float getLowestTemperature() {
-        return 0;
+    public double getLowestTemperature() {
+        return extractor.getMinTemperature();
+    }
+
+    public double getCurrentTemperature() {
+        return extractor.getCurrentTemperature();
     }
 
     public String getCoordinates() {
-        return String.format("%.0f:%.0f", getLatitude(), getLongitude());
+        return String.format("%.2f:%.2f", getLatitude(), getLongitude());
+    }
+//
+//    public String getCityName() {
+//        return null;
+//    }
+//
+//    public String getCountry() {
+//        return null;
+//    }
+//
+    public double getLatitude() {
+        return extractor.getLatitude();
     }
 
-    public String getCityName() {
-        return null;
+    public double getLongitude() {
+        return extractor.getLongitude();
     }
 
-    public String getCountry() {
-        return null;
-    }
+    public String getWeatherData() { return weatherData; }
 
-    public float getLatitude() {
-        return 0;
-    }
-
-    public float getLongitude() {
-        return 0;
-    }
-
-    public float changeTempSystem(String system, float temp) { float changedTemp = 0; return changedTemp; }
-
-    public String getReport() {
-        // TODO Compile the full report;
-        return null;
+    public String getReport(String fileName) {
+        ReportCompiler compiler = new ReportCompiler();
+        return compiler.compileReport(this, fileName);
     }
 }

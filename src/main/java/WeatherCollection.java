@@ -1,20 +1,25 @@
-package java;
+package program;
+
+import java.io.*;
 
 public class WeatherCollection implements Weather {
 
-    private String jsonWeatherData;
-
-    @Override
-    public WeatherReport getCurrentWeather(WeatherRequest request) {
-        // TODO Get the object of weatherProgram.WeatherRequest and add its parameters into the URL. Connect the URL.
-        // TODO Get the lowest and highest temperature of the current day.
-        return new WeatherReport(null);
+    public WeatherReport getWeather(WeatherRequest request) {
+        StringBuilder stringBuilder = new StringBuilder();
+        String line;
+        try {
+            //BufferedReader reader = new BufferedReader(new FileReader(request.filename));
+            BufferedReader reader = new BufferedReader(new FileReader("C:\\Users\\jelen\\IdeaProjects\\Weather\\src\\main\\java\\forecast.txt"));
+            while ((line = reader.readLine()) != null) {
+                stringBuilder.append(line);
+            }
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        System.out.println(stringBuilder.toString());
+        return new WeatherReport(stringBuilder.toString(), request.getCurrentWeather());
     }
 
-    @Override
-    public WeatherReport getForecastWeather(WeatherRequest request) {
-        // TODO Get the lowest and highest temp of the 3 next days.
-        return new WeatherReport(null);
-    }
 }
-
